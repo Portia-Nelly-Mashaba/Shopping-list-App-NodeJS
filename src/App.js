@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Form, Button, ListGroup, Modal } from 'react-bootstrap';
-import { FaEdit, FaTrash, FaEye, FaShoppingCart } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaEye, FaShoppingCart, FaSearch } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Import Google Font
@@ -19,6 +19,7 @@ const App = () => {
   const [editItem, setEditItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchItems();
@@ -58,15 +59,48 @@ const App = () => {
     setShowModal(true);
   };
 
+  const handleSearch = () => {
+    const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    setItems(filteredItems);
+  };
+
   return (
     <div style={{ fontFamily: 'Poppins, sans-serif' }}>
       {/* Header Section */}
-      <header className="text-center py-4" style={{ backgroundColor: '#d4edda' }}>
-        <h1 className="mb-3" style={{ fontWeight: '600' }}>MyKeeper</h1> {/* Added more margin */}
-        <h5 className="text-muted">
-          <FaShoppingCart className="me-2" /> Smart Shopping List
-        </h5>
+      <header className="py-4" style={{ backgroundColor: '#d4edda', borderBottom: '3px solid darkgreen' }}>
+        <Container>
+          <Row className="align-items-center">
+            <Col>
+              <h1 className="mb-0" style={{ fontWeight: '600', fontSize: '2rem' }}>
+                 MyKeeper
+              </h1>
+            </Col>
+          </Row>
+          <h5 className="text-center text-muted mt-2">
+          <FaShoppingCart className="me-2" />Smart Shopping List
+          </h5>
+        </Container>
+        
       </header>
+
+      {/* Search Section */}
+      <Container className="mt-4" style={{  paddingBottom: '10px' }}>
+        <Row className="justify-content-center">
+          <Col md={6} className="d-flex align-items-center">
+            <Form.Control
+              type="text"
+              placeholder="Search items..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="me-2"
+            />
+            <Button variant="outline-success" onClick={handleSearch}>
+              <FaSearch />
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+
 
       <Container className="mt-4">
         <Row className="justify-content-between">
