@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Form, Button, ListGroup, Modal } from 'react-bootstrap';
 import { FaEdit, FaTrash, FaEye, FaShoppingCart, FaSearch } from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Import Google Font
 const fontLink = document.createElement("link");
@@ -26,21 +28,31 @@ const App = () => {
   }, []);
 
   const fetchItems = async () => {
-    const response = await axios.get(API_URL);
-    setItems(response.data);
+    try {
+      const response = await axios.get(API_URL);
+      setItems(response.data);
+    } catch (error) {
+      toast.error('Failed to fetch items. Please try again.');
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editItem) {
-      await axios.put(`${API_URL}/${editItem.id}`, { name, quantity });
-    } else {
-      await axios.post(API_URL, { name, quantity });
+    try {
+      if (editItem) {
+        await axios.put(`${API_URL}/${editItem.id}`, { name, quantity });
+        toast.success('Item updated successfully!');
+      } else {
+        await axios.post(API_URL, { name, quantity });
+        toast.success('Item added successfully!');
+      }
+      setName('');
+      setQuantity('');
+      setEditItem(null);
+      fetchItems();
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
     }
-    setName('');
-    setQuantity('');
-    setEditItem(null);
-    fetchItems();
   };
 
   const handleEdit = (item) => {
@@ -50,8 +62,13 @@ const App = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`${API_URL}/${id}`);
-    fetchItems();
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+      toast.success('Item deleted successfully!');
+      fetchItems();
+    } catch (error) {
+      toast.error('Failed to delete item. Please try again.');
+    }
   };
 
   const handleView = (item) => {
@@ -62,29 +79,44 @@ const App = () => {
   const handleSearch = () => {
     const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
     setItems(filteredItems);
+    if (filteredItems.length === 0) {
+      toast.info('No items found matching your search.');
+    }
   };
 
   return (
     <div style={{ fontFamily: 'Poppins, sans-serif' }}>
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
       {/* Header Section */}
       <header className="py-4" style={{ backgroundColor: '#d4edda', borderBottom: '3px solid darkgreen' }}>
         <Container>
           <Row className="align-items-center">
             <Col>
               <h1 className="mb-0" style={{ fontWeight: '600', fontSize: '2rem' }}>
-                 MyKeeper
+                MyKeeper
               </h1>
             </Col>
           </Row>
           <h5 className="text-center text-muted mt-2">
-          <FaShoppingCart className="me-2" />Smart Shopping List
+            <FaShoppingCart className="me-2" />Smart Shopping List
           </h5>
         </Container>
-        
       </header>
 
       {/* Search Section */}
-      <Container className="mt-4" style={{  paddingBottom: '10px' }}>
+      <Container className="mt-4" style={{ paddingBottom: '10px' }}>
         <Row className="justify-content-center">
           <Col md={6} className="d-flex align-items-center">
             <Form.Control
@@ -100,7 +132,6 @@ const App = () => {
           </Col>
         </Row>
       </Container>
-
 
       <Container className="mt-4">
         <Row className="justify-content-between">
@@ -150,8 +181,12 @@ const App = () => {
                         className="me-3"
                         checked={item.checked}
                         onChange={async () => {
-                          await axios.put(`${API_URL}/${item.id}`, { ...item, checked: !item.checked });
-                          fetchItems();
+                          try {
+                            await axios.put(`${API_URL}/${item.id}`, { ...item, checked: !item.checked });
+                            fetchItems();
+                          } catch (error) {
+                            toast.error('Failed to update item. Please try again.');
+                          }
                         }}
                       />
                       <span className="fw-bold me-2">Qty: {item.quantity}</span>

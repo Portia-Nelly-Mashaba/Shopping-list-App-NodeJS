@@ -1,43 +1,41 @@
-Here’s a professional and comprehensive `README.md` file for your shopping list application. You can place this file in the root of your project directory.
+# MyKeeper - Smart Shopping List App
 
----
-
-# Shopping List Application
-
-This is a full-stack shopping list application built with **React.js** for the frontend and **Node.js + Express** for the backend. The application allows users to manage a shopping list by adding, editing, viewing, and deleting items. The data is stored in a JSON file on the server.
+MyKeeper is a full-stack shopping list application built with **React.js** for the frontend and **Node.js + Express** for the backend. It allows users to manage their shopping list by adding, editing, viewing, and deleting items. The data is stored in a JSON file on the server, making it lightweight and easy to use.
 
 ---
 
 ## Features
 
-- **Frontend:**
-  - Add new shopping list items with a name and quantity.
-  - View all items in a list with checkboxes.
-  - Edit existing items.
-  - Delete items.
-  - View item details in a modal.
-  - Responsive and professional UI built with **Bootstrap**.
+### Frontend
+- **Add New Items:** Add items to the shopping list with a name and quantity.
+- **Edit Items:** Update existing items in the list.
+- **Delete Items:** Remove items from the list.
+- **View Item Details:** View item details in a modal.
+- **Checkbox for Items:** Mark items as checked/unchecked.
+- **Responsive Design:** Built with **Bootstrap** and **React-Bootstrap** for a professional and mobile-friendly UI.
+- **Icons:** Uses **React Icons** for a modern look.
 
-- **Backend:**
-  - REST API with CRUD operations (Create, Read, Update, Delete).
-  - Data stored in a JSON file (`shoppingList.json`).
-  - Built using **Node.js**, **Express**, and **CORS**.
+### Backend
+- **REST API:** CRUD operations (Create, Read, Update, Delete) for managing shopping list items.
+- **JSON Storage:** Data is stored in a `shoppingList.json` file.
+- **Error Handling:** Basic error handling and validation.
 
 ---
 
 ## Technologies Used
 
-- **Frontend:**
-  - React.js
-  - Axios (for API calls)
-  - Bootstrap (for styling)
-  - React-Bootstrap (for pre-built components)
+### Frontend
+- **React.js**
+- **Axios** (for API calls)
+- **Bootstrap** (for styling)
+- **React-Bootstrap** (for pre-built components)
+- **React Icons** (for icons like edit, delete, view, search)
 
-- **Backend:**
-  - Node.js
-  - Express.js
-  - CORS (for cross-origin requests)
-  - Body-parser (for parsing JSON data)
+### Backend
+- **Node.js**
+- **Express.js**
+- **CORS** (for cross-origin requests)
+- **Body-parser** (for parsing JSON data)
 
 ---
 
@@ -47,23 +45,25 @@ Follow these steps to set up and run the application locally.
 
 ### Prerequisites
 
-- Node.js and npm installed on your machine.
+- **Node.js** and **npm** installed on your machine.
 
 ### Steps
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/shopping-list-app.git
-   cd shopping-list-app
+   git clone https://github.com/Portia-Nelly-Mashaba/Shopping-list-App-NodeJS.git
+   cd shopping-list-app-nodejs>
    ```
 
 2. **Set Up the Backend:**
+   Navigate to the `backend` folder and install dependencies:
    ```bash
    cd backend
    npm install
    ```
 
 3. **Start the Backend Server:**
+   Run the backend server:
    ```bash
    node server.js
    ```
@@ -77,6 +77,7 @@ Follow these steps to set up and run the application locally.
    ```
 
 5. **Start the Frontend:**
+   Run the React app:
    ```bash
    npm start
    ```
@@ -84,21 +85,10 @@ Follow these steps to set up and run the application locally.
 
 ---
 
-## API Endpoints
-
-The backend exposes the following REST API endpoints:
-
-- **GET `/shopping-list`**: Fetch all shopping list items.
-- **POST `/shopping-list`**: Add a new item to the shopping list.
-- **PUT `/shopping-list/:id`**: Update an existing item by ID.
-- **DELETE `/shopping-list/:id`**: Delete an item by ID.
-
----
-
 ## Folder Structure
 
 ```
-shopping-list-app/
+mykeeper-shopping-list/
 ├── backend/
 │   ├── node_modules/
 │   ├── shoppingList.json       # JSON file to store shopping list data
@@ -120,22 +110,38 @@ shopping-list-app/
 
 ---
 
+## API Endpoints
+
+The backend exposes the following REST API endpoints:
+
+- **GET `/shopping-list`**: Fetch all shopping list items.
+- **POST `/shopping-list`**: Add a new item to the shopping list.
+- **PUT `/shopping-list/:id`**: Update an existing item by ID.
+- **DELETE `/shopping-list/:id`**: Delete an item by ID.
+
+---
+
 ## Screenshots
 
-1. **Form and List Display:**
-   ![Form and List Display](https://via.placeholder.com/600x400?text=Form+and+List+Display)
+1. **Shopping List with Add section, Search/Edit/Delete Buttons:**
+   ![Shopping List](src/assets/images/nodejs_shoppinglist.png)
 
-2. **View Modal:**
-   ![View Modal](https://via.placeholder.com/600x400?text=View+Modal)
-
-3. **Edit Functionality:**
-   ![Edit Functionality](https://via.placeholder.com/600x400?text=Edit+Functionality)
+2. **View Item Details Modal:**
+   ![View Modal](src/assets/images/shoppinglist-view.png)
 
 ---
 
 ## Testing
 
-You can test the backend API using **Postman** or any other API testing tool. For the frontend, simply interact with the UI in your browser.
+### Backend Testing
+Use **Postman** or any API testing tool to test the backend endpoints:
+- `GET /shopping-list`
+- `POST /shopping-list`
+- `PUT /shopping-list/:id`
+- `DELETE /shopping-list/:id`
+
+### Frontend Testing
+Open the app in your browser (`http://localhost:3000`) and interact with the UI to test all features.
 
 ---
 
@@ -150,20 +156,5 @@ If you'd like to contribute to this project, please follow these steps:
 
 ---
 
-## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## Contact
-
-For any questions or feedback, feel free to reach out:
-
-- **Your Name**
-- **Email:** your-email@example.com
-- **GitHub:** [your-username](https://github.com/your-username)
-
----
-
-Enjoy using the Shopping List Application! 🛒
+Enjoy using **MyKeeper**! 🛒
